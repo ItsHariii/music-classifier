@@ -1,0 +1,12 @@
+numpy
+pandas
+librosa
+scikit-learn
+xgboost
+lightgbm
+tensorflow
+joblib
+pydub
+pretty_midi
+streamlit
+tqdm
