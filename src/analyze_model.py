@@ -33,14 +33,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # === Load Voting Ensemble Model ===
-ensemble = joblib.load("/Users/harimanivannan/Documents/GitHub/music-classifier/src/models/VotingEnsemble.pkl")
+ensemble = joblib.load("/Users/harimanivannan/Documents/GitHub/music-classifier/src/models/XGBoost.pkl")
 
 # === Confusion Matrix ===
 y_pred = ensemble.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=le.classes_)
 disp.plot(cmap='Blues')
-plt.title("Voting Ensemble Confusion Matrix")
+plt.title("XGBoost Confusion Matrix")
 plt.show()
 
 # === Feature Distributions ===

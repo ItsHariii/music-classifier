@@ -8,9 +8,9 @@ import tempfile
 from pydub import AudioSegment
 import pretty_midi
 
-st.set_page_config(page_title="Music Emotion Classifier", layout="centered")
+st.set_page_config(page_title="Musical Emotion Classifier", layout="centered")
 
-st.title("🎼 Music Emotion Classifier")
+st.title(" Musical Emotion Classifier")
 st.markdown("Upload a `.wav`, `.mp3`, or `.mid` audio file to predict the emotion.")
 
 # ======= FEATURE EXTRACTION =======
@@ -95,8 +95,8 @@ def predict_emotion(wav_path):
     X = pd.DataFrame([feats])
 
     # Load preprocessing tools and model
-    scaler = joblib.load("models/scaler.pkl")
-    label_encoder = joblib.load("models/label_encoder.pkl")
+    scaler = joblib.load("/Users/harimanivannan/Documents/GitHub/music-classifier/src/models/scaler.pkl")
+    label_encoder = joblib.load("/Users/harimanivannan/Documents/GitHub/music-classifier/src/models/label_encoder.pkl")
     expected_columns = scaler.feature_names_in_
 
     for col in expected_columns:
@@ -105,7 +105,7 @@ def predict_emotion(wav_path):
     X = X[expected_columns]
 
     X_scaled = scaler.transform(X)
-    model = joblib.load("models/VotingEnsemble.pkl")
+    model = joblib.load("/Users/harimanivannan/Documents/GitHub/music-classifier/src/models/XGBoost.pkl")
     y_pred = model.predict(X_scaled)
     return label_encoder.inverse_transform(y_pred)[0]
 

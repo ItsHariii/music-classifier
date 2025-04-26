@@ -97,13 +97,13 @@ def process_dataset(audio_root, label_lookup, output_csv):
             print(f"⚠️ Error processing {rel_path}: {e}")
     df = pd.DataFrame(all_data)
     df.to_csv(output_csv, index=False)
-    print(f"✅ Saved to {output_csv}")
+    print(f" Saved to {output_csv}")
 
 
 # === RUN EXTRACTION ===
 for ds in datasets:
 
-    print(f"\n🎧 Processing {ds['name']}...")
+    print(f"\n Processing {ds['name']}...")
     
     if ds["name"] == "mec":
         label_map = {}

@@ -14,7 +14,7 @@ import joblib
 from sklearn.utils import resample
 
 # === Load and Combine Feature CSVs ===
-print("🔗 Loading features...")
+print(" Loading features...")
 dfs = []
 for name in ["mec", "deam", "emopia"]:
     path = f"/Users/harimanivannan/Documents/GitHub/music-classifier/data/{name}/{name}_features.csv"
@@ -27,7 +27,7 @@ df = pd.concat(dfs, ignore_index=True)
 df.dropna(inplace=True)
 
 # Print class distribution before balancing
-print("📊 Original emotion distribution:")
+print(" Original emotion distribution:")
 print(df["emotion"].value_counts())
 
 # Split by emotion
@@ -49,7 +49,7 @@ calm_up   = resample(calm_df,   replace=True, n_samples=target_size, random_stat
 df = pd.concat([sad_up, happy_up, angry_up, calm_up]).sample(frac=1, random_state=42).reset_index(drop=True)
 
 # Print new class distribution
-print("✅ Balanced emotion distribution:")
+print(" Balanced emotion distribution:")
 print(df["emotion"].value_counts())
 
 # Encode labels
@@ -137,15 +137,15 @@ for name, model, score in results:
         model.save(filename)
     else:
         joblib.dump(model, filename)
-    print(f"✅ Saved {name} with F1={score:.4f} to {filename}")
+    print(f"Saved {name} with F1={score:.4f} to {filename}")
 
 # === Save Scaler and Label Encoder ===
 joblib.dump(scaler, "models/scaler.pkl")
 joblib.dump(le, "models/label_encoder.pkl")
-print("✅ Saved scaler and label encoder to 'models/'")
+print("Saved scaler and label encoder to 'models/'")
 
 # === Final Ranking ===
 results.sort(key=lambda x: x[2], reverse=True)
-print("\n🏁 Final Model Rankings:")
+print("\n Final Model Rankings:")
 for rank, (name, _, f1) in enumerate(results, 1):
     print(f"{rank}. {name}: F1 Score = {f1:.4f}")
